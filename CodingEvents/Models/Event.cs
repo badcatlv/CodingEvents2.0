@@ -7,8 +7,12 @@ namespace CodingEvents.Models
 		public string? Description { get; set; }
 		public string? ContactEmail { get; set; }
 		public EventCategory Category { get; set; }
+<<<<<<< HEAD
+		public int CategoryId { get; set;}
+=======
 		public int CategoryId { get; set; }
 
+>>>>>>> main
 		public int Id { get; set; }
 
 		public Event()
