@@ -37,21 +37,16 @@ namespace CodingEvents.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("longtext");
 
-<<<<<<< HEAD
                     b.Property<int?>("TagId")
                         .HasColumnType("int");
 
-=======
->>>>>>> main
+
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-<<<<<<< HEAD
                     b.HasIndex("TagId");
 
-=======
->>>>>>> main
                     b.ToTable("Events");
                 });
 
@@ -69,7 +64,6 @@ namespace CodingEvents.Migrations
                     b.ToTable("Categories");
                 });
 
-<<<<<<< HEAD
             modelBuilder.Entity("CodingEvents.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -86,8 +80,7 @@ namespace CodingEvents.Migrations
                     b.ToTable("Tags");
                 });
 
-=======
->>>>>>> main
+
             modelBuilder.Entity("CodingEvents.Models.Event", b =>
                 {
                     b.HasOne("CodingEvents.Models.EventCategory", "Category")
@@ -96,13 +89,11 @@ namespace CodingEvents.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-<<<<<<< HEAD
                     b.HasOne("CodingEvents.Models.Tag", null)
                         .WithMany("Events")
                         .HasForeignKey("TagId");
 
-=======
->>>>>>> main
+
                     b.Navigation("Category");
                 });
 
@@ -110,14 +101,11 @@ namespace CodingEvents.Migrations
                 {
                     b.Navigation("Events");
                 });
-<<<<<<< HEAD
 
             modelBuilder.Entity("CodingEvents.Models.Tag", b =>
                 {
                     b.Navigation("Events");
                 });
-=======
->>>>>>> main
 #pragma warning restore 612, 618
         }
     }
