@@ -3,6 +3,7 @@ using System;
 using CodingEvents.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodingEvents.Migrations
 {
     [DbContext(typeof(EventDbContext))]
-    partial class EventDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231125184754_new2")]
+    partial class new2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -39,7 +42,6 @@ namespace CodingEvents.Migrations
 
                     b.Property<int?>("TagId")
                         .HasColumnType("int");
-
 
                     b.HasKey("Id");
 
@@ -80,7 +82,6 @@ namespace CodingEvents.Migrations
                     b.ToTable("Tags");
                 });
 
-
             modelBuilder.Entity("CodingEvents.Models.Event", b =>
                 {
                     b.HasOne("CodingEvents.Models.EventCategory", "Category")
@@ -92,7 +93,6 @@ namespace CodingEvents.Migrations
                     b.HasOne("CodingEvents.Models.Tag", null)
                         .WithMany("Events")
                         .HasForeignKey("TagId");
-
 
                     b.Navigation("Category");
                 });

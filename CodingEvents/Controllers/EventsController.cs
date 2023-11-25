@@ -31,8 +31,7 @@ namespace CodingEvents.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            List<EventCategory> categories = context.Categories.ToList();
-            AddEventViewModel addEventViewModel = new AddEventViewModel(categories);
+            AddEventViewModel addEventViewModel = new AddEventViewModel(context.Categories.ToList());
 
             return View(addEventViewModel);
         }
@@ -42,8 +41,8 @@ namespace CodingEvents.Controllers
         {
             if (ModelState.IsValid)
             {
-                EventCategory theCategory = 
-                    context.Categories.Find(addEventViewModel.CategoryId);
+                EventCategory theCategory = context.Categories.Find(addEventViewModel.CategoryId);
+
                 Event newEvent = new Event
                 {
                     Name = addEventViewModel.Name,
@@ -80,6 +79,14 @@ namespace CodingEvents.Controllers
             context.SaveChanges();
 
             return Redirect("/Events");
+        }
+
+        public IActionResult Detail(int id)
+        {
+            Event theEvent = context.Events.Include(e => e.Category).Single(e => e.Id== id);
+
+            EventDetailViewModel viewModel = new EventDetailViewModel(theEvent);
+            return View(viewModel);
         }
     }
 }
