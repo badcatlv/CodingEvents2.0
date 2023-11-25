@@ -18,6 +18,7 @@ namespace CodingEvents.ViewModels
 		[EmailAddress]
 		public string? ContactEmail { get; set; }
 
+<<<<<<< HEAD
         [Required(ErrorMessage = "Category is required")]
         public int CategoryId { get; set; }
         public List<SelectListItem>? Categories { get; set;}
@@ -42,5 +43,30 @@ namespace CodingEvents.ViewModels
             
         }
 
+=======
+        public int CategoryId { get; set; }
+
+        public List<SelectListItem>? Categories { get; set; }
+
+
+        public AddEventViewModel(List<EventCategory> categories)
+        {
+            Categories = new List<SelectListItem>();
+
+            foreach (var category in categories)
+            {
+                Categories.Add(new SelectListItem
+                {
+                    Value = category.Id.ToString(),
+                    Text = category.Name
+                });
+            }
+        }
+
+        public AddEventViewModel()
+        {
+
+        }
+>>>>>>> main
     }
 }

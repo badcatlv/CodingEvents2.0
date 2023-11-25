@@ -31,7 +31,12 @@ namespace CodingEvents.Controllers
         [HttpGet]
         public IActionResult Add()
         {
+<<<<<<< HEAD
             AddEventViewModel addEventViewModel = new AddEventViewModel(context.Categories.ToList());
+=======
+            List<EventCategory> categories = context.Categories.ToList();
+            AddEventViewModel addEventViewModel = new AddEventViewModel(categories);
+>>>>>>> main
 
             return View(addEventViewModel);
         }
@@ -41,7 +46,12 @@ namespace CodingEvents.Controllers
         {
             if (ModelState.IsValid)
             {
+<<<<<<< HEAD
                 EventCategory theCategory = context.Categories.Find(addEventViewModel.CategoryId);
+=======
+                EventCategory theCategory = 
+                    context.Categories.Find(addEventViewModel.CategoryId);
+>>>>>>> main
                 Event newEvent = new Event
                 {
                     Name = addEventViewModel.Name,
