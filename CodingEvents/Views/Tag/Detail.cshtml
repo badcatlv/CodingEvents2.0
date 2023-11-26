@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CodingEvents.Models.Tag
+
+@if (Model.Events.ToList().Count == 0)
+{
+    <h1>No elements with the given tag</h1>
+}
+else
+{
+    <h1>Events Tagged: @Model.Name</h1>
+
+    <ul>
+        @foreach (var evtTag in Model.Events)
+        {
+            <li><a asp-controller="Events" asp-action="Detail" asp-route-id ="@Model.Id">@evtTag.Name</a></li>
+        }
+    </ul>
+
+}
