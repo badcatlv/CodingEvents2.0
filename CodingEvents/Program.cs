@@ -1,7 +1,9 @@
-﻿using CodingEvents.Data;
+using CodingEvents.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("EventDbContextConnection") ?? throw new InvalidOperationException("Connection string 'EventDbContextConnection' not found.");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -16,7 +18,11 @@ var connectionString = "server=localhost;user=codingevents;password=codingevents
 var serverVersion = new MySqlServerVersion(new Version(8, 0, 34));
 
 builder.Services.AddDbContext<EventDbContext>(dbContextOptions => dbContextOptions.UseMySql(connectionString, serverVersion));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<EventDbContext>();
 //--- end of connection syntax
+
 
 
 var app = builder.Build();
@@ -33,8 +39,11 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
+app.MapRazorPages();
+app.MapControllers();
 
 app.MapControllerRoute(
     name: "default",
@@ -42,3 +51,14 @@ app.MapControllerRoute(
 
 app.Run();
 
+builder.Services.AddRazorPages();
+builder.Services.AddDefaultIdentity<IdentityUser>
+(options =>
+{
+    options.SignIn.RequireConfirmedAccount = true;
+    options.Password.RequireDigit = false;
+    options.Password.RequiredLength = 10;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = false;
+}).AddEntityFrameworkStores<EventDbContext>();
